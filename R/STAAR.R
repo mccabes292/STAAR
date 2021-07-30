@@ -148,7 +148,7 @@ STAAR <- function(genotype,obj_nullmodel,annotation_phred=NULL,
 
         residuals.phenotype <- obj_nullmodel$scaled.residuals
         residuals.phenotype <- residuals.phenotype*sqrt(P_scalar)
-
+        print("SMMAT")
         pvalues <- STAAR_O_SMMAT(G,P,residuals.phenotype,
                                  weights_B=w_B,weights_S=w_S,weights_A=w_A,
                                  mac=as.integer(round(MAF*2*dim(G)[1])))
@@ -158,7 +158,7 @@ STAAR <- function(genotype,obj_nullmodel,annotation_phred=NULL,
         cov <- obj_nullmodel$cov
 
         residuals.phenotype <- obj_nullmodel$scaled.residuals
-
+        print("Sparse")
         pvalues <- STAAR_O_SMMAT_sparse(G,Sigma_i,Sigma_iX,cov,residuals.phenotype,
                                         weights_B=w_B,weights_S=w_S,weights_A=w_A,
                                         mac=as.integer(round(MAF*2*dim(G)[1])))
@@ -174,7 +174,7 @@ STAAR <- function(genotype,obj_nullmodel,annotation_phred=NULL,
       }
 
       residuals.phenotype <- obj_nullmodel$y - obj_nullmodel$fitted.values
-
+      print("Reg")
       pvalues <- STAAR_O(G,X,working,sigma,fam,residuals.phenotype,
                          weights_B=w_B,weights_S=w_S,weights_A=w_A,
                          mac=as.integer(round(MAF*2*dim(G)[1])))
